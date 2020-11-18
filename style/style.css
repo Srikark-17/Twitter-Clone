@@ -18,11 +18,41 @@ body {
 }
 
 .main {
+  display: flex;
+  flex-direction: column;
   background-color: coral;
   flex: 1;
 }
 
 .tweets-sidebar-container {
+  display: flex;
   background-color: cyan;
   flex: 1;
+}
+
+.tweets-sidebar {
+  width: 200px;
+  height: 500px;
+  margin: 20px;
+  background-color: bisque;
+}
+
+.tweets-search-container {
+  height: 70px;
+  margin: 20px;
+  background-color: red;
+}
+
+.tweets-list {
+  height: 500px;
+  margin: 20px;
+  background-color: #516bf0;
+}
+
+.tweet-container {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  background-color: white;
+  margin: 10px;
 }
