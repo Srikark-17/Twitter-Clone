@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  background-color: blue;
+}
+
+.navigation-container {
+  width: 20%;
+  background-color: aqua;
+  max-width: 100px;
+  min-width: 70px;
+}
+
+.main {
+  background-color: coral;
+  flex: 1;
+}
+
+.tweets-sidebar-container {
+  background-color: cyan;
+  flex: 1;
+}
