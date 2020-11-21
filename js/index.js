@@ -47,27 +47,35 @@ const buildTweets = (tweets, nextPage) => {
   let twitterContent = "";
   tweets.map((tweet) => {
     twitterContent += `
-    <div class="tweet-user-info">
-        <div class="tweet-user-profile">
-        </div>
-        <div class="tweet-user-name-container">
-            <div class="tweet-user-fullname">
-                Lorem ipsum
+    <div class="tweet-container">
+        <div class="tweet-user-info">
+            <div class="tweet-user-profile">
+
             </div>
-            <div class="tweet-user-username">
-                @realloremipsum
+            <div class="tweet-user-name-container">
+                <div class="tweet-user-fullname">
+                    Lorem ipsum
+                </div>
+                <div class="tweet-user-username">
+                    @realloremipsum
+                </div>
             </div>
         </div>
+        `;
+
+    if (tweet.extended_entities && tweet.extended_entities.media.length > 0) {
+      twitterContent += buildImages(tweet.extended_entities.media);
+    }
+
+    twitterContent += `
+        <div class="tweet-text-container">
+            ${tweet.full_text}
+        </div>
+        <div class="tweet-date-container">
+            20 hours ago
+        </div>
     </div>
-    <div class="tweet-images-container">
-        <div class="tweet-image"></div>
-    </div>
-    <div class="tweet-text-container">
-        ${tweet.full_text}
-    </div>
-    <div class="tweet-date-container">
-        20 hours ago
-    </div>`;
+                    `;
   });
 
   document.querySelector(".tweets-list").innerHTML = twitterContent;
@@ -76,7 +84,18 @@ const buildTweets = (tweets, nextPage) => {
 /**
  * Build HTML for Tweets Images
  */
-const buildImages = (mediaList) => {};
+const buildImages = (mediaList) => {
+  let imagesContent = ` <div class="tweet-images-container">`;
+  let imageExists = false;
+  mediaList.map((media) => {
+    if (media.type == "photo") {
+      imageExists = true;
+      imagesContent += `<div class="tweet-image" style="background-image: url(${media.media_url_https})"></div>`;
+    }
+  });
+  imagesContent += `</div>`;
+  return imagesContent ? imagesContent : "";
+};
 
 /**
  * Build HTML for Tweets Video
