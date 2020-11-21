@@ -49,15 +49,15 @@ const buildTweets = (tweets, nextPage) => {
     twitterContent += `
     <div class="tweet-container">
         <div class="tweet-user-info">
-            <div class="tweet-user-profile">
-
+            <div class="tweet-user-profile" style="background-image: url(${tweet.user.profile_image_url_https})">
+            
             </div>
             <div class="tweet-user-name-container">
                 <div class="tweet-user-fullname">
-                    Lorem ipsum
+                    ${tweet.user.name}
                 </div>
                 <div class="tweet-user-username">
-                    @realloremipsum
+                ${tweet.user.screen_name}
                 </div>
             </div>
         </div>
@@ -112,12 +112,13 @@ const buildVideo = (mediaList) => {
         <source src="${media.video_info.variants[0].url}" type="video/mp4">
       </vid>
       `;
-    } else if(media.type == animated_gif) {
-        videoExists = true;
+    } else if (media.type == "animated_gif") {
+      videoExists = true;
       videoContent += `
       <video loop autoplay>
         <source src="${media.video_info.variants[0].url}" type="video/mp4">
       </vid>
+      `;
     }
   });
   videoContent += `</div>`;
