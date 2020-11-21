@@ -1,11 +1,21 @@
-const URL = "http://localhost:3000/tweets";
+const URL = "http://localhost:8080/tweets";
+
+const onEnter = (e) => {
+  if (e.key == "Enter") {
+    getTwitterData();
+  }
+};
 
 /**
  * Retrive Twitter Data from API
  */
 const getTwitterData = () => {
-  const url = "http://localhost:8080/tweets?q=coding&count=10";
-  fetch(url)
+  const query = document.getElementById("user-search-input").value;
+  const count = 10;
+  if (!query) return;
+  const encodedQuery = encodeURIComponent(query);
+  const fullURL = `${URL}?q=${encodedQuery}&count=${count}`;
+  fetch(fullURL)
     .then((response) => {
       return response.json();
     })

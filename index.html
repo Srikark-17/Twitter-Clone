@@ -30,7 +30,7 @@
             </div>
             <div class="main">
                 <div class="tweets-search-container">
-                    <input type="text" placeholder="Search Twitter" id="user-search-input" />
+                    <input type="text" placeholder="Search Twitter" id="user-search-input" onkeyup="onEnter(event)" />
                     <i class="fas fa-search fa-flip-horizontal" onclick=getTwitterData()></i>
                 </div>
                 <div class="tweets-list">
