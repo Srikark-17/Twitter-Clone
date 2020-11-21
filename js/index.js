@@ -65,6 +65,7 @@ const buildTweets = (tweets, nextPage) => {
 
     if (tweet.extended_entities && tweet.extended_entities.media.length > 0) {
       twitterContent += buildImages(tweet.extended_entities.media);
+      twitterContent += buildVideo(tweet.extended_entities.media);
     }
 
     twitterContent += `
@@ -94,10 +95,31 @@ const buildImages = (mediaList) => {
     }
   });
   imagesContent += `</div>`;
-  return imagesContent ? imagesContent : "";
+  return imageExists ? imagesContent : "";
 };
 
 /**
  * Build HTML for Tweets Video
  */
-const buildVideo = (mediaList) => {};
+const buildVideo = (mediaList) => {
+  let videoContent = ` <div class="tweet-video-container">`;
+  let videoExists = false;
+  mediaList.map((media) => {
+    if (media.type == "video") {
+      videoExists = true;
+      videoContent += `
+      <video controls>
+        <source src="${media.video_info.variants[0].url}" type="video/mp4">
+      </vid>
+      `;
+    } else if(media.type == animated_gif) {
+        videoExists = true;
+      videoContent += `
+      <video loop autoplay>
+        <source src="${media.video_info.variants[0].url}" type="video/mp4">
+      </vid>
+    }
+  });
+  videoContent += `</div>`;
+  return videoExists ? videoContent : "";
+};
