@@ -92,6 +92,7 @@ body {
   text-align: center;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+  visibility: hidden;
 }
 
 .next-page-container:hover {

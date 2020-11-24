@@ -1,26 +1,39 @@
 const URL = "http://localhost:8080/tweets";
 
+let nextPageUrl = null;
+
 const onEnter = (e) => {
   if (e.key == "Enter") {
     getTwitterData();
   }
 };
 
+const onNextPage = () => {
+  if (nextPageUrl) {
+    getTwitterData(true);
+  }
+};
+
 /**
  * Retrive Twitter Data from API
  */
-const getTwitterData = () => {
+const getTwitterData = (nextPage = false) => {
   const query = document.getElementById("user-search-input").value;
   const count = 10;
   if (!query) return;
   const encodedQuery = encodeURIComponent(query);
-  const fullURL = `${URL}?q=${encodedQuery}&count=${count}`;
+  let fullURL = `${URL}?q=${encodedQuery}&count=${count}`;
+  if (nextPageUrl && nextPage) {
+    fullURL = nextPageUrl;
+  }
   fetch(fullURL)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
-      buildTweets(data.statuses);
+      buildTweets(data.statuses, nextPage);
+      saveNextPage(data.search_metadata);
+      nextPageButtonVisibility(data.search_metadata);
     })
     .catch((err) => console.log(err));
 };
@@ -28,7 +41,13 @@ const getTwitterData = () => {
 /**
  * Save the next page data
  */
-const saveNextPage = (metadata) => {};
+const saveNextPage = (metadata) => {
+  if (metadata.next_results) {
+    nextPageUrl = `${URL}${metadata.next_results}`;
+  } else {
+    nextPageUrl = null;
+  }
+};
 
 /**
  * Handle when a user clicks on a trend
@@ -42,7 +61,13 @@ const selectTrend = (e) => {
 /**
  * Set the visibility of next page based on if there is data on next page
  */
-const nextPageButtonVisibility = (metadata) => {};
+const nextPageButtonVisibility = (metadata) => {
+  if (metadata.next_results) {
+    document.getElementById("next-page").style.visibility = "visible";
+  } else {
+    document.getElementById("next-page").style.visibility = "hidden";
+  }
+};
 
 /**
  * Build Tweets HTML based on Data from API
@@ -84,7 +109,13 @@ const buildTweets = (tweets, nextPage) => {
     `;
   });
 
-  document.querySelector(".tweets-list").innerHTML = twitterContent;
+  if (nextPage) {
+    document
+      .querySelector(".tweets-list")
+      .insertAdjacentHTML("beforeend", twitterContent);
+  } else {
+    document.querySelector(".tweets-list").innerHTML = twitterContent;
+  }
 };
 
 /**
