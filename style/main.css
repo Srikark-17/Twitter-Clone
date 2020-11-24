@@ -77,3 +77,23 @@ body {
   flex-direction: column;
   flex: 1;
 }
+
+.next-page-container {
+  display: flex;
+  border: 1px solid #1c1c1c;
+  justify-content: center;
+  border-radius: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  color: #47525d;
+  padding: 6px;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.next-page-container:hover {
+  background-color: #1c1c1c;
+}

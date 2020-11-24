@@ -81,7 +81,7 @@ const buildTweets = (tweets, nextPage) => {
             ${createDate}
         </div>
     </div>
-                    `;
+    `;
   });
 
   document.querySelector(".tweets-list").innerHTML = twitterContent;
