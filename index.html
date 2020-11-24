@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="style/main.css">
         <link rel="stylesheet" href="style/tweet.css">
         <link rel="stylesheet" href="style/trending.css">
+        <link rel="icon" type="image/png" sizes="32x32" href="assets/favi.ico">
         <script src="https://kit.fontawesome.com/c939d0e917.js" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     </head>
@@ -35,7 +36,10 @@
                     <i class="fas fa-search fa-flip-horizontal" onclick=getTwitterData()></i>
                 </div>
                 <div class="tweets-list">
-
+                    <div class="tweets-welcome-message">
+                        <h5>Welcome to the Twitter Clone!</h5>
+                        <p>Use  the search above to see what's happening around the world.</p>
+                    </div>
                 </div>
                 <div class="next-page-container" id="next-page" onclick="onNextPage()">
                     <i class="fas fa-arrow-down"></i>
@@ -47,7 +51,7 @@
                         <h5>Trends for you</h5>
                         <ul>
                             <li onclick="selectTrend(this)">
-                                #Coding
+                                #Programming
                             </li>
                             <li onclick="selectTrend(this)">
                                 #JavaScript
